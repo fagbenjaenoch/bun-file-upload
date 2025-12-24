@@ -1,4 +1,4 @@
-import index from "./web/index.html";
+import index from "@web/index.html";
 
 const server = Bun.serve({
   port: 3000,
