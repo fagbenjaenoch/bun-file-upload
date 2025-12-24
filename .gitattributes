@@ -1,0 +1,6 @@
+# Ensure all text files use LF endings in the repo
+* text=auto
+
+# Enforce specific endings for certain files
+*.sh text eol=lf
+*.bat text eol=crlf
