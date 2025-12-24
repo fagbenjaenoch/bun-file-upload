@@ -1,7 +1,9 @@
+import index from "./web/index.html";
+
 const server = Bun.serve({
   port: 3000,
   routes: {
-    "/": () => new Response("Hi from Bun"),
+    "/": index,
   },
 });
 
