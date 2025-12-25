@@ -7,7 +7,10 @@ const server = Bun.serve({
     "/api": () => Response.json({ message: "hi from bun" }),
     "/upload": async (req) => {
       if (req.method !== "POST") {
-        return Response.json({ error: "Method not allowed" }, { status: 405 });
+        return Response.json(
+          { success: false, error: "Method not allowed" },
+          { status: 405 },
+        );
       }
 
       const form = await req.formData();
@@ -18,7 +21,10 @@ const server = Bun.serve({
       }
       console.log(file);
 
-      return Response.json({ message: "File uploaded successfully" });
+      return Response.json({
+        success: true,
+        message: "File uploaded successfully",
+      });
     },
   },
 });
