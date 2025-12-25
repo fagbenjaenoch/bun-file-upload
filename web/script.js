@@ -35,9 +35,12 @@ async function handleUpload(e) {
 
   const completeHandler = (e) => {
     statusEl.textContent = "Upload Completed";
+
     setTimeout(() => {
       progressBar.style.opacity = 0;
     }, 1000);
+
+    console.log(xhr.response);
   };
   const errorHandler = (e) => {
     statusEl.textContent = "Upload Failed";
@@ -52,6 +55,4 @@ async function handleUpload(e) {
 
   xhr.open("POST", "/upload");
   xhr.send(formData);
-
-  console.log(xhr.response);
 }
