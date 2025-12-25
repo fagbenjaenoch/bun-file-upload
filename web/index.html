@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
         <title>Bun App</title>
+        <script defer src="script.js"></script>
     </head>
     <body>
         <h1>Bun File Upload Service</h1>
@@ -13,37 +14,4 @@
             <button type="submit" id="upload-btn">Upload</button>
         </form>
     </body>
-    <script>
-        let fileInput, uploadBtn;
-
-        document.addEventListener("DOMContentLoaded", function () {
-            fileInput = document.getElementById("file");
-            uploadBtn = document.getElementById("upload-btn");
-
-            uploadBtn.addEventListener("click", handleUpload);
-        });
-
-        async function handleUpload(e) {
-            e.preventDefault();
-            const file = fileInput.files[0];
-            if (!file) {
-                alert("you must select a file");
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append("file", file);
-
-            try {
-                const response = await fetch("/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                const data = await response.json();
-                console.log(data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    </script>
 </html>
