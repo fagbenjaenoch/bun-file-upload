@@ -40,7 +40,7 @@ async function handleUpload(e) {
       progressBar.style.opacity = 0;
     }, 1000);
 
-    console.log(xhr.response);
+    console.log(JSON.parse(xhr.response));
   };
   const errorHandler = (e) => {
     statusEl.textContent = "Upload Failed";
