@@ -5,6 +5,21 @@ const server = Bun.serve({
   routes: {
     "/": index,
     "/api": () => Response.json({ message: "hi from bun" }),
+    "/upload": async (req) => {
+      if (req.method !== "POST") {
+        return Response.json({ error: "Method not allowed" }, { status: 405 });
+      }
+
+      const form = await req.formData();
+
+      const file = form.get("file");
+      if (!file) {
+        return Response.json({ error: "No file provided" }, { status: 400 });
+      }
+      console.log(file);
+
+      return Response.json({ message: "File uploaded successfully" });
+    },
   },
 });
 
