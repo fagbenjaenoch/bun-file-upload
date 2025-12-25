@@ -17,7 +17,10 @@ const server = Bun.serve({
 
       const file = form.get("file");
       if (!file) {
-        return Response.json({ error: "No file provided" }, { status: 400 });
+        return Response.json(
+          { success: false, error: "No file provided" },
+          { status: 400 },
+        );
       }
       console.log(file);
 
