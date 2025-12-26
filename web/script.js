@@ -1,10 +1,12 @@
-let fileInput, uploadBtn, progressBar, statusEl;
+let fileInput, uploadBtn, progressBar, statusEl, statusText, loadingIndicator;
 
 document.addEventListener("DOMContentLoaded", () => {
   fileInput = document.getElementById("file");
   uploadBtn = document.getElementById("upload-btn");
   progressBar = document.getElementById("progress-bar");
   statusEl = document.getElementById("status");
+  statusText = document.getElementById("status-text");
+  loadingIndicator = document.getElementById("loading-indicator");
 
   uploadBtn.addEventListener("click", handleUpload);
 });
@@ -21,6 +23,8 @@ async function handleUpload(e) {
   formData.append("file", file);
 
   progressBar.style.opacity = 100;
+  statusEl.setAttribute("data-state", "loading");
+  console.log(statusEl);
 
   const xhr = new XMLHttpRequest();
 
@@ -29,12 +33,13 @@ async function handleUpload(e) {
       const percentCompleted = Math.round((e.loaded / e.total) * 100);
 
       progressBar.value = percentCompleted;
-      statusEl.textContent = `${percentCompleted}% uploaded`;
+      statusText.textContent = `${percentCompleted}% uploaded`;
     }
   });
 
   const completeHandler = (e) => {
-    statusEl.textContent = "Upload Completed";
+    statusText.textContent = "Upload Completed";
+    statusEl.setAttribute("data-state", "completed");
 
     setTimeout(() => {
       progressBar.style.opacity = 0;
@@ -43,10 +48,12 @@ async function handleUpload(e) {
     console.log(JSON.parse(xhr.response));
   };
   const errorHandler = (e) => {
-    statusEl.textContent = "Upload Failed";
+    statusText.textContent = "Upload Failed";
+    statusEl.setAttribute("data-state", "failed");
   };
   const abortHandler = (e) => {
-    statusEl.textContent = "Upload Aborted";
+    statusText.textContent = "Upload Aborted";
+    statusEl.setAttribute("data-state", "aborted");
   };
 
   xhr.addEventListener("load", completeHandler, false);
