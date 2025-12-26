@@ -23,10 +23,16 @@ const server = Bun.serve({
         );
       }
       console.log(file);
+      const hash = new Bun.CryptoHasher("sha256");
+      hash.update(file.toString());
+      const digest = hash.digest("hex");
 
       return Response.json({
         success: true,
         message: "File uploaded successfully",
+        payload: {
+          hash: digest,
+        },
       });
     },
   },
