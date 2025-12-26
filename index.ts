@@ -22,7 +22,7 @@ const server = Bun.serve({
           { status: 400 },
         );
       }
-      console.log(file);
+
       const hash = new Bun.CryptoHasher("sha256");
       hash.update(file.toString());
       const digest = hash.digest("hex");
