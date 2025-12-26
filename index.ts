@@ -24,7 +24,7 @@ const server = Bun.serve({
       }
 
       const hash = new Bun.CryptoHasher("sha256");
-      hash.update(file.toString());
+      hash.update(file);
       const digest = hash.digest("hex");
 
       return Response.json({
