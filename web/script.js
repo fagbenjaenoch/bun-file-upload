@@ -1,4 +1,4 @@
-let fileInput, uploadBtn, progressBar, statusEl, statusText, loadingIndicator;
+let fileInput, uploadBtn, progressBar, statusEl, statusText;
 
 document.addEventListener("DOMContentLoaded", () => {
   fileInput = document.getElementById("file");
@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   progressBar = document.getElementById("progress-bar");
   statusEl = document.getElementById("status");
   statusText = document.getElementById("status-text");
-  loadingIndicator = document.getElementById("loading-indicator");
 
   uploadBtn.addEventListener("click", handleUpload);
 });
@@ -24,7 +23,6 @@ async function handleUpload(e) {
 
   progressBar.style.opacity = 100;
   statusEl.setAttribute("data-state", "loading");
-  console.log(statusEl);
 
   const xhr = new XMLHttpRequest();
 
